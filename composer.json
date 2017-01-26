@@ -8,12 +8,6 @@
       "email": "gilcierweb@gmail.com"
     }
   ],
-  "version": "master",
-  "source": {
-    "url": "git@github.com:gilcierweb/shopfacil.git",
-    "type": "git",
-    "reference": "origin/master"
-  },
   "require": {
     "php": ">=5.2.8"
   },
