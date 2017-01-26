@@ -1,0 +1,21 @@
+{
+    "name": "gilcierweb/shopfacil",
+    "type": "library",
+    "license": "Mit",
+    "authors": [
+        {
+            "name": "gilcierweb",
+            "email": "gilcierweb@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+       "php": ">=5.2.8",
+    },
+    "require-dev" : {
+       "phpunit/phpunit" : "4.0.*"
+    },
+    "autoload": {
+       "psr-4": { "": "src/" }
+   }
+}
