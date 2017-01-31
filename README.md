@@ -16,10 +16,13 @@ For latest commit version:
 
 Bradesco ShopFácil works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, and HHVM.
 
+Doar com PagSeguro
+https://pag.ae/bmgSGGm
+
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use Bradesco\Shopfacil;
+use Bradesco\Shopfacil\Shopfacil as Shopfacil;
 
 $merchant_id = "90000";
 $chave_seguranca = "SUA CHAVE";
