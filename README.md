@@ -19,7 +19,7 @@ Bradesco ShopFácil works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, and HHVM.
 Doar com PagSeguro
 https://pag.ae/bmgSGGm
 
-[https://raw.github.com/gilcierweb/shopfacil/master/clique-para-doar-qualquer-quantia.jpg](https://pag.ae/bmgSGGm)
+[https://raw.github.com/gilcierweb/shopfacil/master/examples/image/clique-para-doar-qualquer-quantia.jpg](https://pag.ae/bmgSGGm)
 
 <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post"><input name="currency" value="BRL" type="hidden"> <input name="receiverEmail" value="gilcierweb@gmail.com" type="hidden"> <input name="iot" value="button" type="hidden"> <input src="https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/209x48-doar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" type="image"></form>
 
