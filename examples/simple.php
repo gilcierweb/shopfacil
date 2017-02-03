@@ -27,9 +27,7 @@ $bradesco_shopfacil->comprador_endereco_uf = "SP";
 
 $bradesco_shopfacil->boleto_beneficiario = "GilcierWeb TI";
 $bradesco_shopfacil->boleto_carteira = '26';
-
 $bradesco_shopfacil->boleto_nossoNumero = "99123456789";
-$bradesco_shopfacil->token_request_confirmacao_pagamento = "99999999999";
 $bradesco_shopfacil->boleto_dataEmissao = date('Y-m-d');;
 $bradesco_shopfacil->boleto_dataVencimento = "2016-03-05";
 $bradesco_shopfacil->boleto_valorTitulo = 15000;
@@ -49,5 +47,7 @@ $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha9 = "";
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha10 = "";
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha11 = "";
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha12 = "";
+
+$bradesco_shopfacil->token_request_confirmacao_pagamento = "99999999999";
 
 $return_api = $bradesco_shopfacil->serviceRequest();

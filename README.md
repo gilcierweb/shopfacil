@@ -1,10 +1,10 @@
-#Bradesco ShopFácil
+#Bradesco ShopFÃ¡cil
 
-MEIOS DE PAGAMENTO BRADESCO BOLETO BANCÁRIO
+MEIOS DE PAGAMENTO BRADESCO BOLETO BANCÃRIO
 
 ### Installation
 
-To install Bradesco ShopFácil, simply:
+To install Bradesco ShopFÃ¡cil, simply:
 
     $ composer require gilcierweb/shopfacil
 
@@ -14,12 +14,13 @@ For latest commit version:
 
 ### Requirements
 
-Bradesco ShopFácil works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, and HHVM.
+Bradesco ShopFÃ¡cil works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, and HHVM.
 
+### DoaÃ§Ã£o / Donete
 Doar com PagSeguro
 https://pag.ae/bmgSGGm
 
-[![](https://raw.github.com/gilcierweb/shopfacil/master/examples/image/clique-para-doar-qualquer-quantia.jpg)](https://pag.ae/bmgSGGm) 
+[![](https://raw.github.com/gilcierweb/shopfacil/master/examples/image/clique-para-doar-qualquer-quantia.jpg)](https://pag.ae/bmgSGGm)
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -49,14 +50,12 @@ $bradesco_shopfacil->comprador_endereco_uf = "SP";
 
 $bradesco_shopfacil->boleto_beneficiario = "GilcierWeb TI";
 $bradesco_shopfacil->boleto_carteira = '26';
-
 $bradesco_shopfacil->boleto_nossoNumero = "99123456789";
-$bradesco_shopfacil->token_request_confirmacao_pagamento = "99999999999";
 $bradesco_shopfacil->boleto_dataEmissao = date('Y-m-d');;
 $bradesco_shopfacil->boleto_dataVencimento = "2016-03-05";
 $bradesco_shopfacil->boleto_valorTitulo = 15000;
 $bradesco_shopfacil->boleto_urlLogotipo = "http://scopus.com.br/img/scopus.png";
-$bradesco_shopfacil->boleto_mensagemCabecalho = "BRADESCO SHOPFACIL BOLETO BANCÁRIO";
+$bradesco_shopfacil->boleto_mensagemCabecalho = "BRADESCO SHOPFACIL BOLETO BANCÃ¯Â¿Â½RIO";
 $bradesco_shopfacil->boleto_tipoRenderizacao = '2';
 
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha1 = "";
@@ -72,10 +71,12 @@ $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha10 = "";
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha11 = "";
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha12 = "";
 
+$bradesco_shopfacil->token_request_confirmacao_pagamento = "99999999999";
+
 $return_api = $bradesco_shopfacil->serviceRequest();
 ```
 
-### Exemplo de Requisição (JSON)
+### Exemplo de RequisiÃ§Ã£o (JSON)
 
 ```json
 {
@@ -120,7 +121,7 @@ $return_api = $bradesco_shopfacil->serviceRequest();
       "agencia_pagador": "00014",
       "razao_conta_pagador": "07050",
       "conta_pagador": "12345679",
-      "controle_participante": "Segurança arquivo remessa",
+      "controle_participante": "SeguranÃ¯Â¿Â½a arquivo remessa",
       "aplicar_multa": true,
       "valor_percentual_multa": 1000,
       "valor_desconto_bonificacao": 1200,
