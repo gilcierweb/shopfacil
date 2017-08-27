@@ -16,7 +16,7 @@ For latest commit version:
 
 Bradesco ShopFácil works with PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, and HHVM.
 
-### Doação / Donete
+### Doação / Donate
 Doar com PagSeguro
 https://pag.ae/bmgSGGm
 
