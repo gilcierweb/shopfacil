@@ -2,6 +2,7 @@
   "name": "gilcierweb/shopfacil",
   "type": "library",
   "license": "Mit",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "gilcierweb",
@@ -20,6 +21,6 @@
       "": "src/"
     }
   },
-  "minimum-stability" : "dev",
+  "minimum-stability" : "stable",
   "prefer-stable" : true
 }
