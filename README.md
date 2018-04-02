@@ -54,7 +54,7 @@ $bradesco_shopfacil->boleto_nossoNumero = "99123456789";
 $bradesco_shopfacil->boleto_dataEmissao = date('Y-m-d');;
 $bradesco_shopfacil->boleto_dataVencimento = "2016-03-05";
 $bradesco_shopfacil->boleto_valorTitulo = 15000;
-$bradesco_shopfacil->boleto_urlLogotipo = "http://scopus.com.br/img/scopus.png";
+$bradesco_shopfacil->boleto_urlLogotipo = "http://via.placeholder.com/120x80";
 $bradesco_shopfacil->boleto_mensagemCabecalho = "BRADESCO SHOPFACIL BOLETO BANCÁRIO";
 $bradesco_shopfacil->boleto_tipoRenderizacao = '2';
 
