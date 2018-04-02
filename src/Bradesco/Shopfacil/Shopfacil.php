@@ -18,8 +18,10 @@ class Shopfacil
     public $charset = 'UTF-8';
 
     public $sandbox = false;
-    public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br/api';
-    public $url_producao = 'https://meiosdepagamentobradesco.com.br/api';
+    //public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br/api';
+    //public $url_producao = 'https://meiosdepagamentobradesco.com.br/api';
+    public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br/apiboleto';
+    public $url_producao = 'https://meiosdepagamentobradesco.com.br/apiboleto';
 
     public $pedido_numero = 0;
     public $pedido_descricao = null;

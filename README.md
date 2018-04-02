@@ -55,7 +55,7 @@ $bradesco_shopfacil->boleto_dataEmissao = date('Y-m-d');;
 $bradesco_shopfacil->boleto_dataVencimento = "2016-03-05";
 $bradesco_shopfacil->boleto_valorTitulo = 15000;
 $bradesco_shopfacil->boleto_urlLogotipo = "http://scopus.com.br/img/scopus.png";
-$bradesco_shopfacil->boleto_mensagemCabecalho = "BRADESCO SHOPFACIL BOLETO BANCï¿½RIO";
+$bradesco_shopfacil->boleto_mensagemCabecalho = "BRADESCO SHOPFACIL BOLETO BANCÁRIO";
 $bradesco_shopfacil->boleto_tipoRenderizacao = '2';
 
 $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha1 = "";
@@ -121,7 +121,7 @@ $return_api = $bradesco_shopfacil->serviceRequest();
       "agencia_pagador": "00014",
       "razao_conta_pagador": "07050",
       "conta_pagador": "12345679",
-      "controle_participante": "Seguranï¿½a arquivo remessa",
+      "controle_participante": "Segurança arquivo remessa",
       "aplicar_multa": true,
       "valor_percentual_multa": 1000,
       "valor_desconto_bonificacao": 1200,
@@ -172,5 +172,8 @@ $return_api = $bradesco_shopfacil->serviceRequest();
   }
 }
 ```
+URL Manaul
+
+https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_BoletoBancario.pdf
 
 http://gilcierweb.com.br
