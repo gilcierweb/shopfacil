@@ -109,7 +109,7 @@ $return_api = $bradesco_shopfacil->serviceRequest();
     "data_emissao": "2016-03-01",
     "data_vencimento": "2016-03-05",
     "valor_titulo": 15000,
-    "url_logotipo": " http://scopus.com.br/img/scopus.png",
+    "url_logotipo": "http://via.placeholder.com/120x80",
     "mensagem_cabecalho": "mensagem de cabecalho",
     "tipo_renderizacao": "2",
     "instrucoes": {
