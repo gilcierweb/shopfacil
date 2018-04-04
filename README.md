@@ -22,6 +22,12 @@ https://pag.ae/bmgSGGm
 
 [![](https://raw.github.com/gilcierweb/shopfacil/master/examples/image/clique-para-doar-qualquer-quantia.jpg)](https://pag.ae/bmgSGGm)
 
+### Consultoria / consulting
+
+http://gilcierweb.com.br
+
+### Exemplo / Example
+
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
@@ -172,8 +178,10 @@ $return_api = $bradesco_shopfacil->serviceRequest();
   }
 }
 ```
-URL Manaul
+### URL Manaul
 
 https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_BoletoBancario.pdf
+
+### Site
 
 http://gilcierweb.com.br
