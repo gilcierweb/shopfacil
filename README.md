@@ -7,6 +7,8 @@ MEIOS DE PAGAMENTO BRADESCO BOLETO BANCÁRIO
 To install Bradesco ShopFácil, simply:
 
     $ composer require gilcierweb/shopfacil
+    or
+    $ composer require gilcierweb/shopfacil:master
 
 For latest commit version:
 
