@@ -180,7 +180,7 @@ $return_api = $bradesco_shopfacil->serviceRequest();
   }
 }
 ```
-### URL Manaul
+### URL Manual
 
 https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_BoletoBancario.pdf
 
