@@ -184,6 +184,10 @@ $return_api = $bradesco_shopfacil->serviceRequest();
 
 https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_BoletoBancario.pdf
 
+### URL Manual Consultas de Pedidos
+
+https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_ConsultaPedidos.pdf
+
 ### Site
 
 http://gilcierweb.com.br
