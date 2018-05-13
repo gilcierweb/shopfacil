@@ -10,18 +10,16 @@ namespace Bradesco\Shopfacil;
 
 class Shopfacil
 {
-
-
     public $merchant_id = null;
+    public $email = null;
     public $chave_seguranca = null;
     public $media_type = 'application/json';
     public $charset = 'UTF-8';
 
     public $sandbox = false;
-    //public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br/api';
-    //public $url_producao = 'https://meiosdepagamentobradesco.com.br/api';
-    public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br/apiboleto';
-    public $url_producao = 'https://meiosdepagamentobradesco.com.br/apiboleto';
+
+    public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br';
+    public $url_producao = 'https://meiosdepagamentobradesco.com.br';
 
     public $pedido_numero = 0;
     public $pedido_descricao = null;
@@ -70,16 +68,18 @@ class Shopfacil
     private $data_service_boleto = array();
 
     public $data_service_boleto_registro = null;
+    public $token = null;
 
     /**
      * Bradesco Shopfacil.
      * @param string $code
      * @param string $key
      */
-    public function __construct($merchantId, $chaveSeguranca)
+    public function __construct($merchantId, $chaveSeguranca, $email= false )
     {
         $this->merchant_id = trim($merchantId);
         $this->chave_seguranca = trim($chaveSeguranca);
+        $this->email = trim($email);
     }
 
     /**
@@ -152,6 +152,24 @@ class Shopfacil
     {
         $this->data_service_boleto_instrucoes = $data_service_boleto_instrucoes;
         return $this;
+    }
+
+    /**
+     * @param array getToken
+     * @return Shopfacil
+     */
+    public function getToken()
+    {
+
+        if($this->serviceAuthorization()->status->codigo != 0)
+            return false;
+
+        $token = $this->serviceAuthorization()->token->token;
+        if(!empty($token)) {
+            $this->token = $this->serviceAuthorization ()->token->token;
+            return $this->token;
+        }else
+            return false;
     }
 
     /**
@@ -271,8 +289,7 @@ class Shopfacil
             $URL_BRADESCO = $this->url_producao;
         }
 
-        $url = "$URL_BRADESCO" . "/transacao";
-
+        $url = "$URL_BRADESCO" . "/apiboleto/transacao";
         //Configuracao do cabecalho da requisicao
         $headers = array();
         $headers[] = "Accept: " . $this->media_type;
@@ -293,7 +310,66 @@ class Shopfacil
 
         $result = curl_exec($ch);
 
-        return $result;
+        return json_decode($result);
+    }
+    public function serviceAuthorization()
+    {
+        if ($this->sandbox) {
+            $URL_BRADESCO = $this->url_homologacao;
+        } else {
+            $URL_BRADESCO = $this->url_producao;
+        }
+
+        $url = "$URL_BRADESCO" . "/SPSConsulta/Authentication/".$this->merchant_id;
+        //Configuracao do cabecalho da requisicao
+        $headers = array();
+        $headers[] = "Accept: " . $this->media_type;
+        $headers[] = "Accept-Charset: " . $this->charset;
+        $headers[] = "Accept-Encoding: " . $this->media_type;
+        $headers[] = "Content-Type: " . $this->media_type . ";charset=" . $this->charset;
+        $AuthorizationHeader = $this->email . ":" . $this->chave_seguranca;
+        $AuthorizationHeaderBase64 = base64_encode($AuthorizationHeader);
+        $headers[] = "Authorization: Basic " . $AuthorizationHeaderBase64;
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+
+        return json_decode($result);
+    }
+
+    public function serviceGetOrderById($orderID)
+    {
+        if ($this->sandbox) {
+            $URL_BRADESCO = $this->url_homologacao;
+        } else {
+            $URL_BRADESCO = $this->url_producao;
+        }
+
+        $url = "$URL_BRADESCO" . "/SPSConsulta/GetOrderById/".$this->merchant_id."?token=".$this->getToken()."&orderId=".$orderID;
+        //Configuracao do cabecalho da requisicao
+        $headers = array();
+        $headers[] = "Accept: " . $this->media_type;
+        $headers[] = "Accept-Charset: " . $this->charset;
+        $headers[] = "Accept-Encoding: " . $this->media_type;
+        $headers[] = "Content-Type: " . $this->media_type . ";charset=" . $this->charset;
+        $AuthorizationHeader = $this->email . ":" . $this->chave_seguranca;
+        $AuthorizationHeaderBase64 = base64_encode($AuthorizationHeader);
+        $headers[] = "Authorization: Basic " . $AuthorizationHeaderBase64;
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+
+        return json_decode($result);
     }
 
 }
