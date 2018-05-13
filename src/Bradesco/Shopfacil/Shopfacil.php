@@ -75,7 +75,7 @@ class Shopfacil
      * @param string $code
      * @param string $key
      */
-    public function __construct($merchantId, $chaveSeguranca, $email= false )
+    public function __construct($merchantId, $chaveSeguranca, $email = false )
     {
         $this->merchant_id = trim($merchantId);
         $this->chave_seguranca = trim($chaveSeguranca);
@@ -190,6 +190,9 @@ class Shopfacil
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function dataServicePedido()
     {
         $this->data_service_pedido = array(
@@ -201,6 +204,9 @@ class Shopfacil
         return $this->data_service_pedido;
     }
 
+    /**
+     * @return array
+     */
     public function dataServiceCompradorEndereco()
     {
         $this->data_service_comprador_endereco = array(
@@ -217,6 +223,9 @@ class Shopfacil
 
     }
 
+    /**
+     * @return array
+     */
     public function dataServiceComprador()
     {
         $this->data_service_comprador = array(
@@ -230,6 +239,9 @@ class Shopfacil
         return $this->data_service_comprador;
     }
 
+    /**
+     * @return array
+     */
     public function dataServiceBoleto()
     {
         $this->data_service_boleto = array(
@@ -250,6 +262,9 @@ class Shopfacil
 
     }
 
+    /**
+     * @return array
+     */
     public function dataServiceBoletoInstrucoes()
     {
         $this->data_service_boleto_instrucoes = array(
@@ -270,6 +285,9 @@ class Shopfacil
         return $this->data_service_boleto_instrucoes;
     }
 
+    /**
+     * @return mixed
+     */
     public function serviceRequest()
     {
         $data_service_request = array(
@@ -283,35 +301,14 @@ class Shopfacil
 
         $data_post = json_encode($data_service_request);
 
-        if ($this->sandbox) {
-            $URL_BRADESCO = $this->url_homologacao;
-        } else {
-            $URL_BRADESCO = $this->url_producao;
-        }
+        $url = "/apiboleto/transacao";
 
-        $url = "$URL_BRADESCO" . "/apiboleto/transacao";
-        //Configuracao do cabecalho da requisicao
-        $headers = array();
-        $headers[] = "Accept: " . $this->media_type;
-        $headers[] = "Accept-Charset: " . $this->charset;
-        $headers[] = "Accept-Encoding: " . $this->media_type;
-        $headers[] = "Content-Type: " . $this->media_type . ";charset=" . $this->charset;
-        $AuthorizationHeader = $this->merchant_id . ":" . $this->chave_seguranca;
-        $AuthorizationHeaderBase64 = base64_encode($AuthorizationHeader);
-        $headers[] = "Authorization: Basic " . $AuthorizationHeaderBase64;
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_post);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($ch);
-
-        return json_decode($result);
+        return $this->sendCurl($url, $data_post);
     }
+
+    /**
+     * @return mixed
+     */
     public function serviceAuthorization()
     {
         if ($this->sandbox) {
@@ -320,56 +317,70 @@ class Shopfacil
             $URL_BRADESCO = $this->url_producao;
         }
 
-        $url = "$URL_BRADESCO" . "/SPSConsulta/Authentication/".$this->merchant_id;
-        //Configuracao do cabecalho da requisicao
-        $headers = array();
-        $headers[] = "Accept: " . $this->media_type;
-        $headers[] = "Accept-Charset: " . $this->charset;
-        $headers[] = "Accept-Encoding: " . $this->media_type;
-        $headers[] = "Content-Type: " . $this->media_type . ";charset=" . $this->charset;
-        $AuthorizationHeader = $this->email . ":" . $this->chave_seguranca;
-        $AuthorizationHeaderBase64 = base64_encode($AuthorizationHeader);
-        $headers[] = "Authorization: Basic " . $AuthorizationHeaderBase64;
+        $url = "/SPSConsulta/Authentication/".$this->merchant_id;
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($ch);
-
-        return json_decode($result);
+        return $this->sendCurl($url, null, true );
     }
 
+    /**
+     * @param $orderID
+     * @return mixed
+     */
     public function serviceGetOrderById($orderID)
     {
+        $url = "/SPSConsulta/GetOrderById/".$this->merchant_id."?token=".$this->getToken()."&orderId=".$orderID;
+
+        return $this->sendCurl($url, null,true );
+    }
+
+    /**
+     * @param $params_url
+     * @param null $params_data
+     * @param bool $params_authorization_header_email
+     * @return mixed
+     */
+    public function sendCurl($params_url, $params_data = null, $params_authorization_header_email = false){
+
         if ($this->sandbox) {
             $URL_BRADESCO = $this->url_homologacao;
         } else {
             $URL_BRADESCO = $this->url_producao;
         }
 
-        $url = "$URL_BRADESCO" . "/SPSConsulta/GetOrderById/".$this->merchant_id."?token=".$this->getToken()."&orderId=".$orderID;
+        $url = $URL_BRADESCO.$params_url;
+
         //Configuracao do cabecalho da requisicao
         $headers = array();
         $headers[] = "Accept: " . $this->media_type;
         $headers[] = "Accept-Charset: " . $this->charset;
         $headers[] = "Accept-Encoding: " . $this->media_type;
         $headers[] = "Content-Type: " . $this->media_type . ";charset=" . $this->charset;
-        $AuthorizationHeader = $this->email . ":" . $this->chave_seguranca;
+
+        if ($params_authorization_header_email) {
+            $AuthorizationHeader = $this->email . ":" . $this->chave_seguranca;
+        } else {
+            $AuthorizationHeader = $this->merchant_id . ":" . $this->chave_seguranca;
+        }
+
         $AuthorizationHeaderBase64 = base64_encode($AuthorizationHeader);
         $headers[] = "Authorization: Basic " . $AuthorizationHeaderBase64;
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
+
+        if ($params_data) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params_data);
+        }
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);
 
         return json_decode($result);
+
     }
 
 }
