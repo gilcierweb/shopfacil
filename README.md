@@ -8,7 +8,7 @@ To install Bradesco ShopFácil, simply:
 
     $ composer require gilcierweb/shopfacil
     or
-    $ composer require gilcierweb/shopfacil:master
+    $ composer require gilcierweb/shopfacil:dev-master
 
 For latest commit version:
 

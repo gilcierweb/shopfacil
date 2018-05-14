@@ -11,6 +11,7 @@
   ],
   "require": {
     "php": ">=5.2.8"
+    "gilcierweb/shopfacil": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "4.0.*"
