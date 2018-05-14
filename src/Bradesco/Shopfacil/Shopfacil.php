@@ -71,11 +71,12 @@ class Shopfacil
     public $token = null;
 
     /**
-     * Bradesco Shopfacil.
-     * @param string $code
-     * @param string $key
+     * Shopfacil constructor.
+     * @param $merchantId
+     * @param $chaveSeguranca
+     * @param bool $email
      */
-    public function __construct($merchantId, $chaveSeguranca, $email = false )
+    public function __construct($merchantId, $chaveSeguranca, $email = false)
     {
         $this->merchant_id = trim($merchantId);
         $this->chave_seguranca = trim($chaveSeguranca);
