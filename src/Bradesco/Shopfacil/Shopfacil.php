@@ -16,6 +16,8 @@ class Shopfacil
     public $media_type = 'application/json';
     public $charset = 'UTF-8';
 
+    public $token_request_confirmacao_pagamento = null;
+
     public $sandbox = false;
 
     public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br';
@@ -36,7 +38,6 @@ class Shopfacil
     public $comprador_documento = null;
     public $comprador_ip = null;
     public $comprador_user_agent = null;
-    public $token_request_confirmacao_pagamento = null;
 
     public $boleto_beneficiario = null;
     public $boleto_carteira = null;
@@ -161,15 +162,17 @@ class Shopfacil
     public function getToken()
     {
 
-        if($this->serviceAuthorization()->status->codigo != 0)
+        if ($this->serviceAuthorization()->status->codigo != 0) {
             return false;
+        }
 
         $token = $this->serviceAuthorization()->token->token;
-        if(!empty($token)) {
-            $this->token = $this->serviceAuthorization ()->token->token;
+        if (!empty($token)) {
+            $this->token = $this->serviceAuthorization()->token->token;
             return $this->token;
-        }else
+        } else {
             return false;
+        }
     }
 
     /**
