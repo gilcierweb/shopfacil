@@ -16,8 +16,6 @@ class Shopfacil
     public $media_type = 'application/json';
     public $charset = 'UTF-8';
 
-    public $token_request_confirmacao_pagamento = null;
-
     public $sandbox = false;
 
     public $url_homologacao = 'https://homolog.meiosdepagamentobradesco.com.br';
@@ -67,8 +65,9 @@ class Shopfacil
     private $data_service_comprador = array();
     private $data_service_boleto_instrucoes = array();
     private $data_service_boleto = array();
-
     public $data_service_boleto_registro = null;
+
+    public $token_request_confirmacao_pagamento = null;
     public $token = null;
 
     /**
@@ -322,7 +321,7 @@ class Shopfacil
 
         $url = "/SPSConsulta/Authentication/".$this->merchant_id;
 
-        return $this->sendCurl($url, null, true );
+        return $this->sendCurl($url, null, true);
     }
 
     /**
@@ -333,7 +332,7 @@ class Shopfacil
     {
         $url = "/SPSConsulta/GetOrderById/".$this->merchant_id."?token=".$this->getToken()."&orderId=".$orderID;
 
-        return $this->sendCurl($url, null,true );
+        return $this->sendCurl($url, null, true);
     }
 
     /**
@@ -342,7 +341,8 @@ class Shopfacil
      * @param bool $params_authorization_header_email
      * @return mixed
      */
-    public function sendCurl($params_url, $params_data = null, $params_authorization_header_email = false){
+    public function sendCurl($params_url, $params_data = null, $params_authorization_header_email = false)
+    {
 
         if ($this->sandbox) {
             $URL_BRADESCO = $this->url_homologacao;
@@ -350,7 +350,7 @@ class Shopfacil
             $URL_BRADESCO = $this->url_producao;
         }
 
-        $url = $URL_BRADESCO.$params_url;
+        $url = $URL_BRADESCO . $params_url;
 
         //Configuracao do cabecalho da requisicao
         $headers = array();
