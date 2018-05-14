@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": ">=5.2.8"
+    "php": ">=5.2.8",
     "gilcierweb/shopfacil": "dev-master"
   },
   "require-dev": {
