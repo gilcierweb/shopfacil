@@ -314,13 +314,7 @@ class Shopfacil
      */
     public function serviceAuthorization()
     {
-        if ($this->sandbox) {
-            $URL_BRADESCO = $this->url_homologacao;
-        } else {
-            $URL_BRADESCO = $this->url_producao;
-        }
-
-        $url = "/SPSConsulta/Authentication/".$this->merchant_id;
+        $url = "/SPSConsulta/Authentication/" . $this->merchant_id;
 
         return $this->sendCurl($url, null, true);
     }
