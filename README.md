@@ -97,7 +97,7 @@ $bradesco_shopfacil = new Shopfacil($merchant_id, $chave_seguranca, 'example@exa
 
 $return_api_order_by_id = $bradesco_shopfacil->serviceGetOrderById($order_id);
 $return_api_order_list_payment_boleto = $bradesco_shopfacil->serviceGetOrderListPayment($type = 'boleto', $dateInitial, $dateFinal, $status, $offset, $limit);
-$return_api_order_list_payment_tranferencia = $bradesco_shopfacil->serviceGetOrderListPayment($type = 'transferencia', $dateInitial, $dateFinal, $status, $offset, $limit);
+$return_api_order_list_payment_transferencia = $bradesco_shopfacil->serviceGetOrderListPayment($type = 'transferencia', $dateInitial, $dateFinal, $status, $offset, $limit);
 
 ```
 
