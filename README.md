@@ -82,6 +82,23 @@ $bradesco_shopfacil->boleto_instrucoes_instrucaoLinha12 = "";
 $bradesco_shopfacil->token_request_confirmacao_pagamento = "99999999999";
 
 $return_api = $bradesco_shopfacil->serviceRequest();
+
+// Consultas de Pedidos opcional / Query orders optional
+$order_id = 'XXXXXX';
+$type = 'boleto'; // or 'transferencia'
+$dateInitial = date('Y/m/d H:i'); // aaaa/mm/dd  hh:mm
+$dateFinal = date('Y/m/d H:i'); // aaaa/mm/dd  hh:mm
+$status = 0;
+$offset = 1;
+$limit = 15;
+
+// Para consultas é preciso adicionar o email na intancia da classe exemplo
+$bradesco_shopfacil = new Shopfacil($merchant_id, $chave_seguranca, 'example@example.com');
+
+$return_api_order_by_id = $bradesco_shopfacil->serviceGetOrderById($order_id);
+$return_api_order_list_payment_boleto = $bradesco_shopfacil->serviceGetOrderListPayment($type = 'boleto', $dateInitial, $dateFinal, $status, $offset, $limit);
+$return_api_order_list_payment_tranferencia = $bradesco_shopfacil->serviceGetOrderListPayment($type = 'transferencia', $dateInitial, $dateFinal, $status, $offset, $limit);
+
 ```
 
 ### Exemplo de Requisição (JSON)
@@ -180,6 +197,149 @@ $return_api = $bradesco_shopfacil->serviceRequest();
   }
 }
 ```
+
+### Consulta Lista de Pedidos Paginada Exemplo de Resposta (JSON) 
+
+#### Retorno para o Boleto (JSON)
+
+```json
+{
+  "status": {
+    "codigo": 0,
+    "mensagem": "OPERACAO REALIZADA COM SUCESSO"
+  },
+  "token": {
+    "token": " xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "dataCriacao": "dd/MM/yyyy hh:mm:ss"
+  },
+  "pedidos": [
+    {
+      "numero": "1234567890",
+      "valor": "1000",
+      "data": "dd/MM/yyyy hh:mm:ss",
+      "valorPago": "1000",
+      "dataPagamento": "dd/MM/yyyy hh:mm:ss",
+      "dataCredito": "dd/MM/yyyy hh:mm:ss",
+      "linhaDigitavel": "xxxxx.xxxxx xxxxx.xxxxxx xxxxx.xxxxxx x",
+      "status": "10",
+      "erro": "0"
+    },
+    {
+      "numero": "0987654321",
+      "valor": "1000",
+      "data": "dd/MM/yyyy hh:mm:ss",
+      "valorPago": "1000",
+      "dataPagamento": "dd/MM/yyyy hh:mm:ss",
+      "dataCredito": "dd/MM/yyyy hh:mm:ss",
+      "linhaDigitavel": "xxxxx.xxxxx xxxxx.xxxxxx xxxxx.xxxxxx x",
+      "status": "10",
+      "erro": "0"
+    }
+  ],
+  "paging": {
+    "limit": 100,
+    "currentOffset": 1,
+    "nextOffset": 101
+  }
+}
+```
+#### Retorno para Transferência (JSON)
+
+```json
+{
+  "status": {
+    "codigo": 0,
+    "mensagem":
+    "OPERACAO REALIZADA COM SUCESSO"
+  },
+  "token": {
+    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "dataCriacao": "dd/MM/yyyy hh: mm:ss"
+  },
+  "pedidos":
+  [
+    {
+      "numero": "1234567890",
+      "valor": "1000",
+      "data"
+      : "dd/MM/yyyy hh:mm:ss",
+      "protocoloCliente": "xxxxxx",
+      "protocoloLoja": "xxxxxx",
+      "status": "81",
+      "erro": "0"
+    },
+    {
+      "numero": "0987654321",
+      "valor": "1000",
+      "data": "dd/MM/yyyy hh:mm:ss",
+      "protocoloCliente": "xxxxxx",
+      "dataCredito": "dd/MM/yyyy hh:mm:ss",
+      "protocoloLoja": "xxxxxx",
+      "status": "81",
+      "erro": "0"
+    }
+  ],
+  "paging": {
+    "limit": 100,
+    "currentOffset": 1,
+    "nextOffset": 101
+  }
+}
+```
+### Consulta de Pedido Exemplo de Resposta (JSON)
+
+#### Retorno para o Boleto (JSON)
+
+```json
+{
+  "status": {
+    "codigo": 0,
+    "mensagem": "OPERACAO REALIZADA COM SUCESSO"
+  },
+  "token": {
+    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "dataCriacao": "dd/MM/yyyy hh:mm:ss"
+  },
+  "pedidos": [
+    {
+      "numero": "1234567890",
+      "valor": "1000",
+      "data": "dd/MM/yyyy hh:mm:ss",
+      "valorPago": "1000",
+      "dataPagamento": "dd/MM/yyyy hh:mm:ss",
+      "linhaDigitavel": "xxxxx.xxxxx xxxxx.xxxxxx xxxxx.xxxxxx x",
+      "status": "10",
+      "erro": "0"
+    }
+  ]
+}
+```
+#### Retorno para Transferência (JSON)
+
+```json
+{
+  "status": {
+    "codigo": 0,
+    "mensagem": "OPERACAO REALIZADA COM SUCESSO"
+  },
+  "token": {
+    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "dataCriacao": "dd/MM/yyyy hh:mm:ss"
+  },
+  "pedidos": [
+    {
+      "numero": "1234567890",
+      "valor": "1000",
+      "data": "dd/MM/yyyy hh:mm:ss",
+      "protocoloCliente": "xxxxxx",
+      "protocoloLoja": "xxxxxx",
+      "status": "81",
+      "erro": "0"
+    }
+  ]
+}
+```
+
 ### URL Manual
 
 https://homolog.meiosdepagamentobradesco.com.br/manual/Manual_BoletoBancario.pdf

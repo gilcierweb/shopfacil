@@ -76,7 +76,7 @@ class Shopfacil
      * @param $chaveSeguranca
      * @param bool $email
      */
-    public function __construct($merchantId, $chaveSeguranca, $email = false)
+    public function __construct($merchantId, $chaveSeguranca, $email = null)
     {
         $this->merchant_id = trim($merchantId);
         $this->chave_seguranca = trim($chaveSeguranca);
@@ -156,26 +156,6 @@ class Shopfacil
     }
 
     /**
-     * @param array getToken
-     * @return Shopfacil
-     */
-    public function getToken()
-    {
-
-        if ($this->serviceAuthorization()->status->codigo != 0) {
-            return false;
-        }
-
-        $token = $this->serviceAuthorization()->token->token;
-        if (!empty($token)) {
-            $this->token = $this->serviceAuthorization()->token->token;
-            return $this->token;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * @return array
      */
     public function getDataServiceBoleto()
@@ -250,7 +230,7 @@ class Shopfacil
         $this->data_service_boleto = array(
             "beneficiario" => $this->boleto_beneficiario,
             "carteira" => $this->boleto_carteira,
-            "nosso_numero" => substr((string)$this->boleto_nossoNumero,-11),
+            "nosso_numero" => substr((string)$this->boleto_nossoNumero, -11),
             "data_emissao" => $this->boleto_dataEmissao,
             "data_vencimento" => $this->boleto_dataVencimento,
             "valor_titulo" => $this->boleto_valorTitulo,
@@ -320,13 +300,49 @@ class Shopfacil
     }
 
     /**
+     * @param array getToken
+     * @return Shopfacil
+     */
+    public function getToken()
+    {
+
+        if ($this->serviceAuthorization()->status->codigo != 0) {
+            return false;
+        }
+
+        $token = $this->serviceAuthorization()->token->token;
+        if (!empty($token)) {
+            $this->token = $this->serviceAuthorization()->token->token;
+            return $this->token;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @param $orderID
      * @return mixed
      */
     public function serviceGetOrderById($orderID)
     {
-        $url = "/SPSConsulta/GetOrderById/".$this->merchant_id."?token=".$this->getToken()."&orderId=".$orderID;
+        $url = "/SPSConsulta/GetOrderById/" . $this->merchant_id . "?token=" . $this->getToken() . "&orderId=" . $orderID;
+        return $this->sendCurl($url, null, true);
+    }
 
+    /**
+     * @param string $type
+     * @param $dateInitial
+     * @param $dateFinal
+     * @param $status
+     * @param $offset
+     * @param $limit
+     * @return mixed
+     */
+    public function serviceGetOrderListPayment($type = 'boleto', $dateInitial, $dateFinal, $status, $offset, $limit)
+    {
+        // https://meiosdepagamentobradesco.com.br/SPSConsulta/GetOrderListPayment/XXXXXXXXX/boleto?token=yyyyyyyyyyyyyyyyyyyy&dataInicial=aaaa/mm/ddhh:mm&dataFinal=aaaa/mm/dd hh:mm&status=ZZZ&offset=VVV&limit=WWW
+        // https://meiosdepagamentobradesco.com.br/SPSConsulta/GetOrderListPayment/XXXXXXXXX/transferencia?token=yyyyyyyyyyyyyyyyyyyy&dataInicial=aaaa/mm/dd hh:mm&dataFinal=aaaa/mm/dd hh:mm&status=ZZZ&offset=VVV&limit=WWW
+        $url = "/SPSConsulta/GetOrderListPayment/" . $this->merchant_id . "/" . $type . "?token=" . $this->getToken() . "&dataInicial=" . $dateInitial . "&dataFinal=" . $dateFinal . "&status=" . $status . "&offset=" . $offset . "&limit=" . $limit;
         return $this->sendCurl($url, null, true);
     }
 
