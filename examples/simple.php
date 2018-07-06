@@ -61,7 +61,7 @@ $status = 0;
 $offset = 1;
 $limit = 15;
 
-// Para consultas é preciso adicionar o email na intancia da classe exemplo
+// Para consultas é preciso adicionar o email na instância da classe exemplo
 $bradesco_shopfacil = new Shopfacil($merchant_id, $chave_seguranca, 'example@example.com');
 
 $return_api_order_by_id = $bradesco_shopfacil->serviceGetOrderById($order_id);
